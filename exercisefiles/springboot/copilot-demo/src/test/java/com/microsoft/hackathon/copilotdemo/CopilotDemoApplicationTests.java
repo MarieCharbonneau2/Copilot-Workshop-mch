@@ -23,4 +23,42 @@ class CopilotDemoApplicationTests {
 			.andExpect(MockMvcResultMatchers.content().string("hello world"));
 	}
 
+	@Test
+	void helloNoKey() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/hello"))
+			.andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.content().string("key not passed"));
+	}
+
+	// Test diffdates
+	@Test
+	void diffdates() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/diffdates?date1=01-01-2021&date2=01-02-2021"))
+			.andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.content().string("31"));
+	}
+
+	// test validatephone
+	@Test
+	void validatephone() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/validatephone?phone=+34666666666"))
+			.andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.content().string("true"));
+	}
+
+	@Test
+	void validatephone2() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/validatephone?phone=+3466666666"))
+			.andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.content().string("false"));
+	}
+
+	// test /color
+	@Test
+	void color() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/color/red"))
+			.andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.content().string("#FF0000"));
+	}
+
 }

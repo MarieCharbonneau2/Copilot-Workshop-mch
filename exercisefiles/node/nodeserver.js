@@ -45,6 +45,7 @@ const server = http.createServer((req, res) => {
         }
 
     }
+
     else if (pathname === '/Validatephonenumber') {
         const phoneNumber = query.phoneNumber;
         const regex = /^\+[1-9]\d{1,14}$/;
