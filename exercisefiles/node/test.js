@@ -24,6 +24,19 @@ describe('Node Server', () => {
     });
 
     //add test to check get when key is equal to world
+    it('should return "hello world" if key is equal to "world"', (done) => {
+        http
+        .get('http://localhost:3000/get?key=world' , (res) => {
+            let data = '';
+            res.on('data', (chunk) => {
+                data += chunk;
+            });
+            res.on('end', () => {
+                assert.equal(data, 'hello world');
+                done();
+            });
+        });
+    });
 
     //add test to check validatephoneNumber
 
